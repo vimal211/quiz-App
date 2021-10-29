@@ -1,0 +1,33 @@
+.home_Container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h3 {
+  color: white;
+  font-size: 50px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+.btn {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.playBtn {
+  color: aliceblue;
+  background-color: rgb(24, 192, 24);
+  border: none;
+  width: 18%;
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-size: 15px;
+  cursor: pointer;
+}
