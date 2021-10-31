@@ -24,6 +24,7 @@ export default class Quiz extends Component {
       this.setState({ qNO: number + 1, timer: 60 });
     }
     if (number === 15) {
+      console.log(this.state);
       this.props.crtDetail(this.state);
       this.setState({ showResult: true });
     }
@@ -47,15 +48,20 @@ export default class Quiz extends Component {
     let wro = this.state.wrong;
     let ans = this.state.questions[this.state.qNO - 1].answer;
     if (ans === selected) {
+      this.setState({ correct: corr + 1 });
       toast.success("Correct Answer");
-      setTimeout(this.setState({ correct: corr + 1 }), 5000);
-      // this.setState({ correct: corr + 1 });
+      setTimeout(() => {
+        this.changeNext();
+      }, 500);
     } else {
       toast.error("Wrong Answer");
       this.setState({ wrong: wro + 1 });
+      setTimeout(() => {
+        this.changeNext();
+      }, 500);
     }
-    console.log(this.state.correct, this.state.wrong);
-    this.changeNext();
+    // console.log(selected);
+    // console.log(ans);
   };
   timer = () => {
     let time = this.state.timer;
@@ -68,6 +74,7 @@ export default class Quiz extends Component {
       <div className="quiz_Container">
         <h1>Question</h1>
         <ToastContainer theme="colored" />
+
         <div className="question_container">
           <p>{this.state.qNO} of 15</p>
           <p>{this.state.questions[this.state.qNO - 1].question}</p>
