@@ -3,6 +3,7 @@ import "./Quiz.css";
 import quiz from "./questions.json";
 import { Redirect, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import TimerIcon from "@mui/icons-material/Timer";
 import "react-toastify/dist/ReactToastify.css";
 
 export default class Quiz extends Component {
@@ -13,7 +14,7 @@ export default class Quiz extends Component {
       qNO: 1,
       correct: 0,
       wrong: 0,
-      timer: 60,
+      timer: 180,
       showResult: false,
     };
   }
@@ -21,7 +22,7 @@ export default class Quiz extends Component {
   changeNext = () => {
     let number = this.state.qNO;
     if (number < 15) {
-      this.setState({ qNO: number + 1, timer: 60 });
+      this.setState({ qNO: number + 1 });
     }
     if (number === 15) {
       console.log(this.state);
@@ -60,14 +61,19 @@ export default class Quiz extends Component {
         this.changeNext();
       }, 500);
     }
-    // console.log(selected);
-    // console.log(ans);
   };
+
   timer = () => {
     let time = this.state.timer;
+    if (time === 0) {
+      this.props.crtDetail(this.state);
+
+      this.setState({ showResult: true });
+    }
     this.setState({ timer: time - 1 });
-    return time;
   };
+
+  interval = setInterval(() => this.timer(), 1000);
 
   render() {
     return (
@@ -78,7 +84,9 @@ export default class Quiz extends Component {
         <div className="question_container">
           <p>{this.state.qNO} of 15</p>
           <p>{this.state.questions[this.state.qNO - 1].question}</p>
-          <div className="timer">{}</div>
+          <div className="timer">
+            <TimerIcon /> {this.state.timer}
+          </div>
         </div>
         <div className="option_Container">
           <p

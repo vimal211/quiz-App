@@ -71,3 +71,11 @@ h1 {
 .quit {
   background-color: #ea4355;
 }
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(13, 145, 13);
+  font-weight: bolder;
+}

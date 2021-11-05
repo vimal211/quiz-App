@@ -7,11 +7,11 @@ export default class Result extends Component {
   render() {
     let details = this.props.details;
     console.log(details);
-    // console.log(this.props.location.state.crt);
     let percentage = 0;
     if (details.correct > 0) {
       percentage = Math.floor((details.correct / 15) * 100);
     }
+
     return (
       <div className="result_Container">
         <div className="head">
@@ -19,7 +19,13 @@ export default class Result extends Component {
           <h3>Result</h3>
         </div>
         <div className="body">
-          <p className="h1">You need more practice!</p>
+          <p className="h1">
+            {percentage <= 30
+              ? "You need more practice!"
+              : percentage > 30 && percentage <= 50
+              ? "Nice Try! Need to improve."
+              : "Excellent!!!"}
+          </p>
           <p className="h2">Your Score is : {percentage}%</p>
           <div>
             <p>Total number of questions:</p>
